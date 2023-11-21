@@ -22,7 +22,7 @@ jobs:
           java-version: '11'
 
       - name: Build with Maven
-        run: echo ${{github.workspace}}; cd ${{github.workspace}}/${{var.SERVICE_NAME}} ; mvn clean install
+        run: echo ${{github.workspace}}; cd ${{github.workspace}}/${{vars.SERVICE_NAME}} ; mvn clean install
 
       - name: Set up Docker
         uses: docker/setup-buildx-action@v1
