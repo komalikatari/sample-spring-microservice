@@ -23,7 +23,7 @@ jobs:
         run: cd {{github.workspace}/{{env.service_name}; mvn clean install
 
       - name: Set up Docker
-        uses: actions/setup-docker@v2
+        uses: docker/setup-buildx-action@v1
 
       - name: Build Docker image
         run: cd {{github.workspace}/{{env.service_name} ;docker build -t ${{env.service_name}}:latest .
