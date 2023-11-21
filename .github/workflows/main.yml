@@ -1,6 +1,6 @@
 name: Build and Deploy Java Microservice
 
-on:
+#on:
   push:
     branches:
       - master
@@ -26,10 +26,14 @@ jobs:
         uses: actions/setup-docker@v2
 
       - name: Build Docker image
-        run: docker build -t your-docker-registry/your-microservice:latest .
+        run: cd {{github.workspace}/{{service_name}docker build -t ${{var.service_name}}:latest .
 
       - name: Log in to Docker registry
-        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} your-docker-registry
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+
+
+      - name: Tagging the image
+        run: docker tag ${{var.service_name}} ${{secrets.DOCKER_USERNAME}}/${{var.service_name}}
 
       - name: Push Docker image
-        run: docker push your-docker-registry/your-microservice:latest
+        run: docker push ${{secrets.DOCKER_USERNAME}}/${{var.service_name}}
