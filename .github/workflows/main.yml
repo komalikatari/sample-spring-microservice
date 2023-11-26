@@ -41,7 +41,7 @@ jobs:
         run: docker push ${{secrets.DOCKER_USERNAME}}/${{vars.SERVICE_NAME}}
   
   deploying:
-   runs-on: deploy-server
+   runs-on: deployment-server
    steps:
    - name: deploying to k8s
      run: sudo kubectl apply -f /opt/java.yaml
