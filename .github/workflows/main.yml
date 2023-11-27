@@ -29,7 +29,7 @@ jobs:
         uses: docker/setup-buildx-action@v1
 
       - name: Build Docker image
-        run:  cd ${{github.workspace}}/${{vars.SERVICE_NAME}} ; docker build -t ${{vars.SERVICE_NAME}} .
+        run:  cd ${{github.workspace}}/${{vars.SERVICE_NAME}}; docker build -t ${{vars.SERVICE_NAME}} .
 
       - name: Log in to Docker registry
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
@@ -44,10 +44,7 @@ jobs:
   deploying:
    needs: build
    runs-on: deployment-server
-   steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
     
     - name: deploying to k8s
-     run:   sudo kubectl apply -f ${{ github.workspace}}/k8s/yaml.yaml
+      run:  sudo kubectl apply -f /opt/java.yaml
    
