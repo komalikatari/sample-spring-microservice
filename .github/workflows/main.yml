@@ -45,6 +45,9 @@ jobs:
    needs: build
    runs-on: deployment-server
    steps:
-   - name: deploying to k8s
-     run: sudo kubectl apply -f /opt/java.yaml
+    - name: Checkout code
+      uses: actions/checkout@v2
+    
+    - name: deploying to k8s
+     run:   sudo kubectl apply -f ${{ github.workspace}}/k8s/yaml.yaml
    
