@@ -46,7 +46,7 @@ jobs:
         run: docker push ${{secrets.DOCKER_USERNAME}}/${{vars.SERVICE_NAME}}:$${{github.run_id}}
   
   deploying:
-   needs: build
+   #needs: build
    runs-on: deployment-server
    steps:
    - name: deploying to k8s
