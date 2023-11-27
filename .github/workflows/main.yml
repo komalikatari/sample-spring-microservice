@@ -23,7 +23,8 @@ jobs:
      
       - name: Extract Maven version
         id: extract-version
-        run: echo "::set-output name=version::$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)"     
+        run: "mvn org.apache.maven.plugins:maven-help-plugin:3.2.0:evaluate -Dexpression=project.version -q -DforceStdout"
+    
 
       - name: Build with Maven
         run: echo ${{github.workspace}}; cd ${{github.workspace}}/${{vars.SERVICE_NAME}} ; mvn clean install
@@ -39,10 +40,10 @@ jobs:
 
 
       - name: Tagging the image
-        run: docker tag ${{vars.SERVICE_NAME}} ${{secrets.DOCKER_USERNAME}}/${{vars.SERVICE_NAME}}:${{ steps.extract-version.outputs.version }}
+        run: docker tag ${{vars.SERVICE_NAME}} ${{secrets.DOCKER_USERNAME}}/${{vars.SERVICE_NAME}}:${{github.run_id}}
 
       - name: Push Docker image
-        run: docker push ${{secrets.DOCKER_USERNAME}}/${{vars.SERVICE_NAME}}:${{ steps.extract-version.outputs.version }}
+        run: docker push ${{secrets.DOCKER_USERNAME}}/${{vars.SERVICE_NAME}}:$${{github.run_id}}
   
   deploying:
    needs: build
