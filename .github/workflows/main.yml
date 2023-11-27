@@ -44,7 +44,8 @@ jobs:
   deploying:
    needs: build
    runs-on: deployment-server
+   steps:
     
-    - name: deploying to k8s
-      run:  sudo kubectl apply -f /opt/java.yaml
+   - name: deploying to k8s
+     run:  sudo kubectl apply -f /opt/java.yaml
    
