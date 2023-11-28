@@ -37,7 +37,7 @@ jobs:
 
 
       - name: Tagging the image
-        run: docker tag ${{vars.SERVICE_NAME}} ${{secrets.DOCKER_USERNAME}}/${{vars.SERVICE_NAME}}:${{github.run_id}}
+        run: echo "docker tag ${{vars.SERVICE_NAME}} ${{secrets.DOCKER_USERNAME}}/${{vars.SERVICE_NAME}}:${{github.run_id}}"
 
       - name: Push Docker image
         run: docker push ${{secrets.DOCKER_USERNAME}}/${{vars.SERVICE_NAME}}:${{github.run_id}}
