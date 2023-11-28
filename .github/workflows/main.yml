@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: kubernetes
 
     steps:
       - name: Checkout code
@@ -43,7 +43,7 @@ jobs:
   
   deploying:
    needs: build
-   runs-on: deployment-server
+   runs-on: deploy
    steps:
     
    - name: deploying to k8s
