@@ -46,6 +46,29 @@ jobs:
    needs: build
    runs-on: deploy
    steps:
+   - name: Set up Docker
+     uses: docker/setup-buildx-action@v1
+
+
+   - name: Install kubernetes with kind
+     run: |
+       [ $(uname -m) = x86_64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.20.0/kind-linux-amd64
+       chmod +x ./kind
+       sudo mv ./kind /usr/local/bin/kind
+       echo "kind version"
+     shell: bash
+  
+   - name: Create Kubernetes cluster with kind
+     run: kind create cluster --name k8s-playground --config kind-config.yaml --wait 5m
+     shell: bash
+
+
+   - name: Install kubectl 
+     run: |
+      curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+      snap install kubectl --classic
+      echo "kubectl version --client"
+     shell: bash
     
    - name: deploying to k8s
      run:  sudo kubectl apply -f /opt/java.yaml
