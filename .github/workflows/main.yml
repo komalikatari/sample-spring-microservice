@@ -37,10 +37,10 @@ jobs:
 
 
       - name: Tagging the image
-        run: docker tag ${{vars.SERVICE_NAME}} ${{vars.REPO_NAME}}/${{vars.SERVICE_NAME}}:latest
+        run: docker tag ${{vars.SERVICE_NAME}} ${{ secrets.DOCKER_USERNAME }}/${{vars.SERVICE_NAME}}:latest
 
       - name: Push Docker image
-        run: docker push ${{vars.REPO_NAME}}/${{vars.SERVICE_NAME}}:latest
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/${{vars.SERVICE_NAME}}:latest
   
   deploying:
    needs: build
