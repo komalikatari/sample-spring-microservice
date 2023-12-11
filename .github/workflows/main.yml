@@ -50,6 +50,7 @@ jobs:
 
    - name: Installing docker
      run: |
+         sudo apt update
          sudo apt install -y docker
          sudo systemctl start docker
          sudo systemctl enable docker
