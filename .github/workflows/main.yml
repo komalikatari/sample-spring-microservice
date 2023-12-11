@@ -53,6 +53,7 @@ jobs:
      with:
         dockerfile: Dockerfile
         container-name: kind
+       
 
    - name: Docker permission 
      run: sudo chmod 777 /var/run/docker.sock    
