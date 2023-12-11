@@ -49,14 +49,19 @@ jobs:
    steps:
 
    - name: Set up Docker
-     uses: docker/setup-buildx-action@v1
+     run: |
+        sudo service docker start
+        sudo docker info
+        sudo usermod -aG docker $USER
+        sudo chmod 666 /var/run/docker.sock
+     #uses: docker/setup-buildx-action@v1
      # with:
      #    dockerfile: Dockerfile
      #    container-name: kind
        
 
-   - name: Docker permission 
-     run: sudo chmod 777 /var/run/docker.sock    
+   # - name: Docker permission 
+   #   run: sudo chmod 777 /var/run/docker.sock    
 
 
    - name: Install kubernetes with kind
