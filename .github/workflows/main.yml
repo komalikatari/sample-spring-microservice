@@ -71,6 +71,16 @@ jobs:
        sudo mv ./kind /usr/local/bin/kind
        echo "kind version"
      shell: bash
+
+   - name: kubernetes cluster with master and worker nodes
+     run: |
+        kind: Cluster
+        apiVersion: kind.x-k8s.io/v1alpha4
+        nodes:
+        - role: control-plane
+        - role: worker
+        - role: worker
+     working-directory: /opt    
   
    - name: Create Kubernetes cluster with kind
      run: kind create cluster --name k8s-playground --config kind-config.yaml --wait 5m
