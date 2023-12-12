@@ -60,8 +60,8 @@ jobs:
      #    container-name: kind
        
 
-   # - name: Docker permission 
-   #   run: sudo chmod 777 /var/run/docker.sock    
+   - name: Docker permission 
+     run: sudo chmod 777 /var/run/docker.sock    
 
 
    - name: Install kubernetes with kind
