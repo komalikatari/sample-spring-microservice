@@ -72,14 +72,19 @@ jobs:
        echo "kind version"
      shell: bash
 
-   - name: kubernetes cluster with master and worker nodes
-     run: |
-        kind create cluster --name k8s-playground --config <(echo 'kind: Cluster\napiVersion: kind.x-k8s.io/v1alpha4\nnodes:\n- role: control-plane\n- role: worker\n- role: worker')
+
+   - name: Create kind-config.yaml
+     run: | 
+       echo -e "kind: Cluster\napiVersion: kind.x-k8s.io/v1alpha4\nnodes:\n- role: control-plane\n- role: worker\n- role: worker" > kind-config.yaml
+
+   # - name: kubernetes cluster with master and worker nodes
+   #   run: |
+   #      kind create cluster --name k8s-playground --config <(echo 'kind: Cluster\napiVersion: kind.x-k8s.io/v1alpha4\nnodes:\n- role: control-plane\n- role: worker\n- role: worker')
         
   
-   # - name: Create Kubernetes cluster with kind
-   #   run: kind create cluster --name k8s-playground --config kind-config.yaml --wait 5m
-   #   shell: bash
+   - name: Create Kubernetes cluster with kind
+     run: kind create cluster --name k8s-playground --config kind-config.yaml --wait 5m
+     shell: bash
 
 
    - name: Install kubectl 
