@@ -80,7 +80,7 @@ jobs:
         - role: control-plane
         - role: worker
         - role: worker
-     working-directory: /opt    
+        
   
    - name: Create Kubernetes cluster with kind
      run: kind create cluster --name k8s-playground --config kind-config.yaml --wait 5m
